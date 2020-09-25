@@ -1,10 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const { generate } = require("./controller");
 
 const app = express();
-const port = 3000;
-const hash = "sampleTest";
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
@@ -27,6 +27,6 @@ app.post("/generate", async (req, res) => {
   }
 });
 
-app.listen(port, "0.0.0.0", () => {
-  console.log("Open");
+app.listen(port, () => {
+  console.log("Express started");
 });
