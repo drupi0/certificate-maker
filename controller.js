@@ -1,5 +1,8 @@
 const HummusRecipe = require("hummus-recipe");
 const fetch = require("fetch-base64");
+const { MongoClient } = require("mongodb");
+const uri = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useUnifiedTopology: true });
 
 // config = [{
 //     "page": number,
@@ -12,6 +15,27 @@ const fetch = require("fetch-base64");
 //     }]
 // }]
 //
+
+function generateConfig(firstName, lastName) {
+  return [
+    {
+      page: 1,
+      values: [
+        {
+          value: `${firstName} ${lastName}`,
+          xPosition: 425.6,
+          yPosition: 305.4,
+          options: {
+            size: 50,
+            font: "Arial",
+            align: "center center",
+          },
+        },
+      ],
+    },
+  ];
+}
+
 async function generate(url, config) {
   try {
     const b64_template = await fetchUrl(url);
@@ -55,4 +79,17 @@ async function fetchUrl(url) {
   });
 }
 
-module.exports = { generate };
+async function searchRecord(email) {
+  await client.connect();
+  return await client
+    .db()
+    .collection(process.env.MONGO_COLLECTION)
+    .findOne(
+      { email },
+      {
+        projection: { first_name: 1, last_name: 1, _id: 0 },
+      }
+    );
+}
+
+module.exports = { generate, searchRecord, generateConfig };
