@@ -29,6 +29,7 @@ function generateConfig(firstName, lastName) {
             size: 50,
             font: "Arial",
             align: "center center",
+            color: "#fe8be2",
           },
         },
       ],
