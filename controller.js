@@ -24,7 +24,7 @@ function generateConfig(firstName, lastName) {
         {
           value: `${firstName} ${lastName}`,
           xPosition: 425.6,
-          yPosition: 305.4,
+          yPosition: 300.0,
           options: {
             size: 50,
             font: "Arial",
