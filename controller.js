@@ -22,7 +22,7 @@ function generateConfig(firstName, lastName) {
       page: 1,
       values: [
         {
-          value: `${firstName} ${lastName}`,
+          value: `${firstName} ${lastName}`.replace(/(^\w{1})|(\s{1}\w{1})/g, match => match.toUpperCase()),
           xPosition: 425.6,
           yPosition: 300.0,
           options: {
