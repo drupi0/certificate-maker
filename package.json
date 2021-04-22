@@ -2,6 +2,7 @@
   "name": "certificate-maker",
   "version": "1.0.0",
   "description": "",
+  "private": true,
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,8 +15,13 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "fetch-base64": "^2.1.2",
-    "firebase-functions": "^3.11.0",
-    "hummus-recipe": "^2.0.0",
-    "mongodb": "^3.6.2"
+    "firebase-admin": "^9.6.0",
+    "firebase-functions": "^3.13.2",
+    "hummus-recipe": "^2.0.1",
+    "mongodb": "^3.6.6"
+  },
+  "devDependencies": {
+    "mocha": "^8.3.2",
+    "prettier": "2.2.1"
   }
 }

@@ -1,17 +1,13 @@
-require("dotenv").config();
 const express = require("express");
-const bodyParser = require("body-parser");
-const { generate, searchRecord, generateConfig } = require("./controller");
+const { config } = require("./environment");
+const { generate, generateConfig, searchRecord} = require("./controllers")
 
 const app = express();
-const port = process.env.PORT;
+const port = config.PORT;
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use("/assets", express.static("assets"));
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
 
 app.get("/generate", async (req, res) => {
   const { email } = req.query;
@@ -28,9 +24,9 @@ app.get("/generate", async (req, res) => {
     res.send({ success: false, message: "Email not found" });
   }
 
-  const config = generateConfig(record.first_name, record.last_name);
+  const pdfConfig = generateConfig(record.first_name, record.last_name);
 
-  generated = await generate(process.env.CERTIFICATE_URL, config);
+  generated = await generate(config.CERTIFICATE_URL, pdfConfig);
 
   if (generated === null) {
     res.status(500);
@@ -43,5 +39,5 @@ app.get("/generate", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log("Express started");
+  console.log(`Server started at port ${port}`);
 });
