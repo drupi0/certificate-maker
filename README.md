@@ -13,3 +13,12 @@
         }]
     }]
 ```
+
+- Generate test certifcate: https://hacktoberfest.jscebu.org/generate?email=macroscode@test.com
+
+- To do:
+```
+- add Docker image
+- add Unit Test
+- add build configurations
+```
