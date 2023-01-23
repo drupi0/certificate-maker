@@ -25,10 +25,20 @@ function generateConfig(firstName, lastName) {
     ];
   }
   
-  async function generate(url, config) {
+  async function generate(fileObject, config, fetchFromUrl = true) {
     try {
-      const b64_template = await fetchUrl(url);
-      const template = new Buffer.from(b64_template[0], "base64");
+
+      let b64_template;
+      let template;
+
+      if(fetchFromUrl) {
+        b64_template = await fetchUrl(fileObject);
+        template = new Buffer.from(b64_template[0], "base64");
+      } else {
+        template = fileObject;
+      }
+
+      
       const pdfdoc = new HummusRecipe(template);
       const pdfCreate = new Promise((resolve, reject) => {
         config.forEach((vars) => {
