@@ -6,7 +6,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app.js",
+    "prod": "pm2 start app.js",
+    "prod-stop": "pm2 stop app.js"
   },
   "engines": {
     "node": "12.11.1",
@@ -27,6 +29,7 @@
   },
   "devDependencies": {
     "mocha": "^8.3.2",
+    "pm2": "^5.2.2",
     "prettier": "2.2.1"
   }
 }
