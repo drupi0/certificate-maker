@@ -8,6 +8,11 @@ const port = config.PORT;
 app.use(express.json());
 app.use("/assets", express.static("assets"));
 
+app.get("/", async(req, res) => {
+   res.status(200);
+   res.send({ success: true, message: "Hello World" });
+
+});
 
 app.post("/v1/generate", async (req, res) => {
   const { email } = req.body;
@@ -39,6 +44,7 @@ app.post("/v1/generate", async (req, res) => {
 });
 
 app.post("/v2/generate", async (req, res) => {
+  
   const { userId, eventId } = req.body;
   
   if (!userId || !eventId) {
